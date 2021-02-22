@@ -10,5 +10,6 @@ export default function AddUserForm({ setUsers }) {
     apiAddUser(newUser);
     setUsers(prev => [...prev, newUser]);
   }
+
   return <UserForm onSubmit={addUser}></UserForm>;
 }
