@@ -65,7 +65,7 @@ export default function UserForm({
         <label htmlFor="website">Website</label>
         <input
           id="website"
-          type="text"
+          type="url"
           value={newUser.website}
           name="website"
           onChange={onChange}

@@ -49,23 +49,29 @@ export default function UsersTable() {
           </tr>
         </thead>
         <tbody>
-          {users.map(user => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>{user.website}</td>
-              <td>
-                <button onClick={() => toggleEditUserForm(true, user)}>
-                  Edit
-                </button>
-              </td>
-              <td>
-                <button onClick={() => deleteUser(user.id)}>Delete</button>
-              </td>
+          {users.length ? (
+            users.map(user => (
+              <tr key={user.id}>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.username}</td>
+                <td>{user.email}</td>
+                <td>{user.website}</td>
+                <td>
+                  <button onClick={() => toggleEditUserForm(true, user)}>
+                    Edit
+                  </button>
+                </td>
+                <td>
+                  <button onClick={() => deleteUser(user.id)}>Delete</button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td>No users to display.</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
       {showAddUserForm ? (
