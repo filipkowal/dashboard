@@ -16,7 +16,7 @@ export default function UserForm({ user = defaultUser, onSubmit }) {
   return (
     <div>
       <form onSubmit={() => onSubmit(newUser)}>
-        <label for="id">ID</label>
+        <label htmlFor="id">ID</label>
         <input
           id="id"
           type="text"
@@ -25,7 +25,7 @@ export default function UserForm({ user = defaultUser, onSubmit }) {
           onChange={onChange}
           disabled
         ></input>
-        <label for="name">Name</label>
+        <label htmlFor="name">Name</label>
         <input
           id="name"
           type="text"
@@ -33,7 +33,7 @@ export default function UserForm({ user = defaultUser, onSubmit }) {
           name="name"
           onChange={onChange}
         ></input>
-        <label for="username">Username</label>
+        <label htmlFor="username">Username</label>
         <input
           id="username"
           type="text"
@@ -41,7 +41,7 @@ export default function UserForm({ user = defaultUser, onSubmit }) {
           name="username"
           onChange={onChange}
         ></input>
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input
           id="email"
           type="email"
@@ -49,14 +49,19 @@ export default function UserForm({ user = defaultUser, onSubmit }) {
           name="email"
           onChange={onChange}
         ></input>
-        <label for="city">City</label>
+        <label htmlFor="website">Website</label>
         <input
-          id="city"
+          id="website"
           type="text"
-          value={newUser.city}
-          name="city"
+          value={newUser.website}
+          name="website"
           onChange={onChange}
         ></input>
+        {user === defaultUser ? (
+          <button>Add user</button>
+        ) : (
+          <button>Edit user</button>
+        )}
       </form>
     </div>
   );

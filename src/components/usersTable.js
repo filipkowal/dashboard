@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
 
 import * as api from '../userService';
+import AddUserForm from './AddUserForm';
+import EditUserForm from './EditUserForm';
 
 export default function UsersTable() {
   const [users, setUsers] = useState([]);
+  const [showAddUserForm, setShowAddUserForm] = useState(false);
+  const [showEditUserForm, setShowEditUserForm] = useState(false);
+  const [editedUser, setEditedUser] = useState({});
 
   useEffect(() => {
     async function getUsers() {
@@ -14,10 +19,11 @@ export default function UsersTable() {
   }, []);
 
   function toggleAddUserForm() {
-    console.log('toggleAddUserForm');
+    setShowAddUserForm(prevState => !prevState);
   }
-  function toggleEditUserForm() {
-    console.log('toggleEditUserForm');
+  function toggleEditUserForm(user) {
+    setEditedUser(user);
+    setShowEditUserForm(prevState => !prevState);
   }
 
   async function deleteUser(userId) {
@@ -39,7 +45,7 @@ export default function UsersTable() {
             <th>Name</th>
             <th>Username</th>
             <th>Email</th>
-            <th>City</th>
+            <th>Website</th>
           </tr>
         </thead>
         <tbody>
@@ -49,9 +55,9 @@ export default function UsersTable() {
               <td>{user.name}</td>
               <td>{user.username}</td>
               <td>{user.email}</td>
-              <td>{user.city}</td>
+              <td>{user.website}</td>
               <td>
-                <button onClick={toggleEditUserForm}>Edit</button>
+                <button onClick={() => toggleEditUserForm(user)}>Edit</button>
               </td>
               <td>
                 <button onClick={() => deleteUser(user.id)}>Delete</button>
@@ -60,6 +66,8 @@ export default function UsersTable() {
           ))}
         </tbody>
       </table>
+      {showAddUserForm ? <AddUserForm /> : ''}
+      {showEditUserForm ? <EditUserForm user={editedUser} /> : ''}
     </div>
   );
 }
