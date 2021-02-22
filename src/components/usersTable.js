@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 
 import * as api from '../userService';
 import AddUserForm from './AddUserForm';
+import AreYouSure from './AreYouSure';
 import EditUserForm from './EditUserForm';
 
 export default function UsersTable() {
   const [users, setUsers] = useState([]);
   const [showAddUserForm, setShowAddUserForm] = useState(false);
   const [showEditUserForm, setShowEditUserForm] = useState(false);
+  const [showAreYouSure, setshowAreYouSure] = useState(false);
   const [editedUser, setEditedUser] = useState({});
 
   useEffect(() => {
@@ -25,10 +27,15 @@ export default function UsersTable() {
     setEditedUser(user);
     setShowEditUserForm(value);
   }
+  function toggleAreYouSure(value, user) {
+    setEditedUser(user);
+    setshowAreYouSure(value);
+  }
 
   async function deleteUser(userId) {
     api.deleteUser(userId);
     setUsers(users.filter(user => user.id !== userId));
+    toggleAreYouSure(false);
   }
 
   console.log('render table', users);
@@ -72,7 +79,7 @@ export default function UsersTable() {
                   </button>
                   <button
                     className="button is-danger is-outlined"
-                    onClick={() => deleteUser(user.id)}
+                    onClick={() => toggleAreYouSure(true, user)}
                   >
                     Delete
                   </button>
@@ -96,6 +103,15 @@ export default function UsersTable() {
           user={editedUser}
           setUsers={setUsers}
           toggleUserForm={toggleEditUserForm}
+        />
+      ) : (
+        ''
+      )}
+      {showAreYouSure ? (
+        <AreYouSure
+          user={editedUser}
+          toggleAreYouSure={toggleAreYouSure}
+          onConfirm={deleteUser}
         />
       ) : (
         ''
