@@ -13,6 +13,7 @@ export default function UserForm({
   toggleUserForm,
 }) {
   const [newUser, setNewUser] = useState(user);
+  const isAddUser = user === defaultUser;
 
   function onChange(event) {
     const { name, value } = event.target;
@@ -26,56 +27,72 @@ export default function UserForm({
 
   return (
     <div>
+      <h4 className="subtitle">{isAddUser ? 'Add user' : 'Edit user'}</h4>
       <form onSubmit={e => onSubmit(e, newUser)}>
-        <label htmlFor="id">ID</label>
-        <input
-          id="id"
-          type="text"
-          value={newUser.id}
-          name="id"
-          onChange={onChange}
-          disabled
-        ></input>
-        <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          value={newUser.name}
-          name="name"
-          onChange={onChange}
-          required
-        ></input>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          value={newUser.username}
-          name="username"
-          onChange={onChange}
-        ></input>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          value={newUser.email}
-          name="email"
-          onChange={onChange}
-          required
-        ></input>
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          type="url"
-          value={newUser.website}
-          name="website"
-          onChange={onChange}
-        ></input>
-        {user === defaultUser ? (
-          <button>Add user</button>
+        <div className="field">
+          <label htmlFor="id">ID</label>
+          <input
+            className="input"
+            id="id"
+            type="text"
+            value={newUser.id}
+            name="id"
+            onChange={onChange}
+            disabled
+          ></input>
+        </div>
+        <div className="field">
+          <label htmlFor="name">Name</label>
+          <input
+            className="input"
+            id="name"
+            type="text"
+            value={newUser.name}
+            name="name"
+            onChange={onChange}
+            required
+          ></input>
+        </div>
+        <div className="field">
+          <label htmlFor="username">Username</label>
+          <input
+            className="input"
+            id="username"
+            type="text"
+            value={newUser.username}
+            name="username"
+            onChange={onChange}
+          ></input>
+        </div>
+        <div className="field">
+          <label htmlFor="email">Email</label>
+          <input
+            className="input"
+            id="email"
+            type="email"
+            value={newUser.email}
+            name="email"
+            onChange={onChange}
+            required
+          ></input>
+        </div>
+        <div className="field">
+          <label htmlFor="website">Website</label>
+          <input
+            className="input"
+            id="website"
+            type="url"
+            value={newUser.website}
+            name="website"
+            onChange={onChange}
+          ></input>
+        </div>
+        {isAddUser ? (
+          <button className="button is-primary">Add user</button>
         ) : (
-          <button>Edit user</button>
+          <button className="button is-primary">Edit user</button>
         )}
-        <button type="button" onClick={onCancel}>
+        <button className="button" type="button" onClick={onCancel}>
           Cancel
         </button>
       </form>

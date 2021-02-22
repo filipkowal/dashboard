@@ -1,0 +1,17 @@
+#root {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+}
+
+.table-title {
+  max-width: 921px !important;
+}
+
+.table-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-button {
+  margin-right: 0.6em;
+}

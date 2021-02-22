@@ -34,11 +34,16 @@ export default function UsersTable() {
   console.log('render table', users);
   return (
     <div>
-      <div>
-        <h4>User List</h4>
-        <button onClick={() => toggleAddUserForm(true)}>Add user</button>
+      <div className="table-title container">
+        <h4 className="subtitle">User List</h4>
+        <button
+          className="button is-primary"
+          onClick={() => toggleAddUserForm(true)}
+        >
+          Add user
+        </button>
       </div>
-      <table>
+      <table className="table container">
         <thead>
           <tr>
             <th>ID</th>
@@ -46,6 +51,7 @@ export default function UsersTable() {
             <th>Username</th>
             <th>Email</th>
             <th>Website</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -58,12 +64,18 @@ export default function UsersTable() {
                 <td>{user.email}</td>
                 <td>{user.website}</td>
                 <td>
-                  <button onClick={() => toggleEditUserForm(true, user)}>
+                  <button
+                    className="button edit-button"
+                    onClick={() => toggleEditUserForm(true, user)}
+                  >
                     Edit
                   </button>
-                </td>
-                <td>
-                  <button onClick={() => deleteUser(user.id)}>Delete</button>
+                  <button
+                    className="button is-danger is-outlined"
+                    onClick={() => deleteUser(user.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))
