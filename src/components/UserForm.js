@@ -26,9 +26,9 @@ export default function UserForm({
   }
 
   return (
-    <div class="modal is-clipped is-active">
-      <div class="modal-background" onClick={onCancel}></div>
-      <div class="modal-content">
+    <div className="modal is-clipped is-active">
+      <div className="modal-background" onClick={onCancel}></div>
+      <div className="modal-content">
         <div className="modal-card">
           <header className="modal-card-head">
             <h4 className="subtitle">{isAddUser ? 'Add user' : 'Edit user'}</h4>
@@ -87,7 +87,7 @@ export default function UserForm({
                 <input
                   className="input"
                   id="website"
-                  type="url"
+                  type="text"
                   value={newUser.website}
                   name="website"
                   onChange={onChange}
@@ -106,7 +106,7 @@ export default function UserForm({
         </div>
       </div>
       <button
-        class="modal-close is-large"
+        className="modal-close is-large"
         aria-label="close"
         onClick={onCancel}
       ></button>
