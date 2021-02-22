@@ -1,8 +1,11 @@
 import { useState } from 'react';
 
 const defaultUser = {
+  id: '',
   name: '',
   email: '',
+  username: '',
+  website: '',
 };
 export default function UserForm({ user = defaultUser, onSubmit }) {
   const [newUser, setNewUser] = useState(user);
@@ -15,7 +18,7 @@ export default function UserForm({ user = defaultUser, onSubmit }) {
 
   return (
     <div>
-      <form onSubmit={() => onSubmit(newUser)}>
+      <form onSubmit={e => onSubmit(e, newUser)}>
         <label htmlFor="id">ID</label>
         <input
           id="id"
@@ -32,6 +35,7 @@ export default function UserForm({ user = defaultUser, onSubmit }) {
           value={newUser.name}
           name="name"
           onChange={onChange}
+          required
         ></input>
         <label htmlFor="username">Username</label>
         <input
@@ -48,6 +52,7 @@ export default function UserForm({ user = defaultUser, onSubmit }) {
           value={newUser.email}
           name="email"
           onChange={onChange}
+          required
         ></input>
         <label htmlFor="website">Website</label>
         <input

@@ -19,11 +19,11 @@ export default function UsersTable() {
   }, []);
 
   function toggleAddUserForm() {
-    setShowAddUserForm(prevState => !prevState);
+    setShowAddUserForm(prev => !prev);
   }
   function toggleEditUserForm(user) {
     setEditedUser(user);
-    setShowEditUserForm(prevState => !prevState);
+    setShowEditUserForm(prev => !prev);
   }
 
   async function deleteUser(userId) {
@@ -66,8 +66,12 @@ export default function UsersTable() {
           ))}
         </tbody>
       </table>
-      {showAddUserForm ? <AddUserForm /> : ''}
-      {showEditUserForm ? <EditUserForm user={editedUser} /> : ''}
+      {showAddUserForm ? <AddUserForm setUsers={setUsers} /> : ''}
+      {showEditUserForm ? (
+        <EditUserForm user={editedUser} setUsers={setUsers} />
+      ) : (
+        ''
+      )}
     </div>
   );
 }

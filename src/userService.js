@@ -15,11 +15,9 @@ export async function deleteUser(userId) {
 }
 
 export async function addUser(user) {
-  const id = Date.now().toString();
-
   fetch(url, {
     method: 'POST',
-    body: JSON.stringify({ ...user, id }),
+    body: JSON.stringify({ ...user, id: user.id }),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
