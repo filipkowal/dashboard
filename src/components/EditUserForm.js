@@ -1,7 +1,7 @@
 import { editUser as apiEditUser } from '../userService';
 import UserForm from './UserForm';
 
-export default function EditUserForm({ user, setUsers }) {
+export default function EditUserForm({ user, setUsers, toggleUserForm }) {
   function editUser(e, user) {
     e.preventDefault();
 
@@ -12,5 +12,11 @@ export default function EditUserForm({ user, setUsers }) {
     ]);
   }
 
-  return <UserForm onSubmit={editUser} user={user}></UserForm>;
+  return (
+    <UserForm
+      onSubmit={editUser}
+      user={user}
+      toggleUserForm={toggleUserForm}
+    ></UserForm>
+  );
 }

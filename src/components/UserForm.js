@@ -7,13 +7,21 @@ const defaultUser = {
   username: '',
   website: '',
 };
-export default function UserForm({ user = defaultUser, onSubmit }) {
+export default function UserForm({
+  user = defaultUser,
+  onSubmit,
+  toggleUserForm,
+}) {
   const [newUser, setNewUser] = useState(user);
 
   function onChange(event) {
     const { name, value } = event.target;
 
     setNewUser({ ...newUser, [name]: value });
+  }
+
+  function onCancel(e) {
+    toggleUserForm(false);
   }
 
   return (
@@ -67,6 +75,9 @@ export default function UserForm({ user = defaultUser, onSubmit }) {
         ) : (
           <button>Edit user</button>
         )}
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
       </form>
     </div>
   );

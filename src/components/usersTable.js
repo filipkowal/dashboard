@@ -18,12 +18,12 @@ export default function UsersTable() {
     getUsers();
   }, []);
 
-  function toggleAddUserForm() {
-    setShowAddUserForm(prev => !prev);
+  function toggleAddUserForm(value) {
+    setShowAddUserForm(value);
   }
-  function toggleEditUserForm(user) {
+  function toggleEditUserForm(value, user) {
     setEditedUser(user);
-    setShowEditUserForm(prev => !prev);
+    setShowEditUserForm(value);
   }
 
   async function deleteUser(userId) {
@@ -31,12 +31,12 @@ export default function UsersTable() {
     setUsers(users.filter(user => user.id !== userId));
   }
 
-  console.log(users);
+  console.log('render table', users);
   return (
     <div>
       <div>
         <h4>User List</h4>
-        <button onClick={toggleAddUserForm}>Add user</button>
+        <button onClick={() => toggleAddUserForm(true)}>Add user</button>
       </div>
       <table>
         <thead>
@@ -57,7 +57,9 @@ export default function UsersTable() {
               <td>{user.email}</td>
               <td>{user.website}</td>
               <td>
-                <button onClick={() => toggleEditUserForm(user)}>Edit</button>
+                <button onClick={() => toggleEditUserForm(true, user)}>
+                  Edit
+                </button>
               </td>
               <td>
                 <button onClick={() => deleteUser(user.id)}>Delete</button>
@@ -66,9 +68,17 @@ export default function UsersTable() {
           ))}
         </tbody>
       </table>
-      {showAddUserForm ? <AddUserForm setUsers={setUsers} /> : ''}
+      {showAddUserForm ? (
+        <AddUserForm setUsers={setUsers} toggleUserForm={toggleAddUserForm} />
+      ) : (
+        ''
+      )}
       {showEditUserForm ? (
-        <EditUserForm user={editedUser} setUsers={setUsers} />
+        <EditUserForm
+          user={editedUser}
+          setUsers={setUsers}
+          toggleUserForm={toggleEditUserForm}
+        />
       ) : (
         ''
       )}
