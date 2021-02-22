@@ -15,3 +15,6 @@
 .edit-button {
   margin-right: 0.6em;
 }
+.sort {
+  cursor: pointer;
+}

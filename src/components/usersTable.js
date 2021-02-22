@@ -4,6 +4,7 @@ import * as api from '../userService';
 import AddUserForm from './AddUserForm';
 import AreYouSure from './AreYouSure';
 import EditUserForm from './EditUserForm';
+import { down, up } from '../assets/icons';
 
 export default function UsersTable() {
   const [users, setUsers] = useState([]);
@@ -11,6 +12,7 @@ export default function UsersTable() {
   const [showEditUserForm, setShowEditUserForm] = useState(false);
   const [showAreYouSure, setshowAreYouSure] = useState(false);
   const [editedUser, setEditedUser] = useState({});
+  const [sortUp, setSortUp] = useState(true);
 
   useEffect(() => {
     async function getUsers() {
@@ -19,6 +21,15 @@ export default function UsersTable() {
     }
     getUsers();
   }, []);
+
+  function compareUsers(a, b) {
+    if (a.name < b.name) {
+      return sortUp ? -1 : 1;
+    }
+    if (a.name > b.name) {
+      return sortUp ? 1 : -1;
+    }
+  }
 
   function toggleAddUserForm(value) {
     setShowAddUserForm(value);
@@ -31,6 +42,9 @@ export default function UsersTable() {
     setEditedUser(user);
     setshowAreYouSure(value);
   }
+  function toggleSortUp() {
+    setSortUp(prev => !prev);
+  }
 
   async function deleteUser(userId) {
     api.deleteUser(userId);
@@ -38,7 +52,6 @@ export default function UsersTable() {
     toggleAreYouSure(false);
   }
 
-  console.log('render table', users);
   return (
     <div>
       <div className="table-title container">
@@ -54,7 +67,9 @@ export default function UsersTable() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th onClick={toggleSortUp} className="sort">
+              Name {sortUp ? up : down}
+            </th>
             <th>Username</th>
             <th>Email</th>
             <th>Website</th>
@@ -63,7 +78,7 @@ export default function UsersTable() {
         </thead>
         <tbody>
           {users.length ? (
-            users.map(user => (
+            users.sort(compareUsers).map(user => (
               <tr key={user.id}>
                 <td>{user.id}</td>
                 <td>{user.name}</td>
