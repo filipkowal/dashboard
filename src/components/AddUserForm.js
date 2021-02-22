@@ -9,6 +9,7 @@ export default function AddUserForm({ setUsers, toggleUserForm }) {
 
     apiAddUser(newUser);
     setUsers(prev => [...prev, newUser]);
+    toggleUserForm(false);
   }
 
   return (

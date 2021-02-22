@@ -10,6 +10,7 @@ export default function EditUserForm({ user, setUsers, toggleUserForm }) {
       ...prev.filter(prevUser => prevUser.id !== user.id),
       user,
     ]);
+    toggleUserForm(false);
   }
 
   return (
