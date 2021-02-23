@@ -1,13 +1,21 @@
 import uniqueId from 'lodash.uniqueid';
 
 import { addUser as apiAddUser } from '../userService';
-import UserForm from './UserForm';
+import Modal from './Modal';
+import FormValidated from './FormValidated';
 
 export default function AddUserForm({ setUsers, toggleUserForm }) {
-  function addUser(e, user) {
+  const defaultUser = {
+    id: '',
+    name: '',
+    email: '',
+    username: '',
+    website: '',
+  };
+
+  function addUser(user) {
     const id = String(Number(uniqueId()) + 10);
     const newUser = { ...user, id };
-    e.preventDefault();
 
     apiAddUser(newUser);
     setUsers(prev => [...prev, newUser]);
@@ -15,6 +23,13 @@ export default function AddUserForm({ setUsers, toggleUserForm }) {
   }
 
   return (
-    <UserForm onSubmit={addUser} toggleUserForm={toggleUserForm}></UserForm>
+    <Modal title={'Add user'} close={() => toggleUserForm(false)}>
+      <FormValidated
+        values={defaultUser}
+        handleSubmit={addUser}
+        handleCancel={() => toggleUserForm(false)}
+        requiredValues={['username', 'email']}
+      />
+    </Modal>
   );
 }

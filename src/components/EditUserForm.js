@@ -1,10 +1,9 @@
 import { editUser as apiEditUser } from '../userService';
-import UserForm from './UserForm';
+import Modal from './Modal';
+import FormValidated from './FormValidated';
 
 export default function EditUserForm({ user, setUsers, toggleUserForm }) {
-  function editUser(e, user) {
-    e.preventDefault();
-
+  function editUser(user) {
     apiEditUser(user);
     setUsers(prev => [
       ...prev.filter(prevUser => prevUser.id !== user.id),
@@ -14,10 +13,13 @@ export default function EditUserForm({ user, setUsers, toggleUserForm }) {
   }
 
   return (
-    <UserForm
-      onSubmit={editUser}
-      user={user}
-      toggleUserForm={toggleUserForm}
-    ></UserForm>
+    <Modal title={'Add user'} close={() => toggleUserForm(false)}>
+      <FormValidated
+        values={user}
+        handleSubmit={editUser}
+        handleCancel={() => toggleUserForm(false)}
+        requiredValues={['username', 'email']}
+      />
+    </Modal>
   );
 }
