@@ -18,7 +18,6 @@ export default function EditUserForm({ user, setUsers, toggleUserForm }) {
         values={user}
         handleSubmit={editUser}
         handleCancel={() => toggleUserForm(false)}
-        requiredValues={['username', 'email']}
       />
     </Modal>
   );

@@ -12,8 +12,7 @@ export default function FormWithValidation({
 
   const { errors, handleSubmit: handleSubmitValidated } = useFormValidation(
     handleSubmit,
-    newValues,
-    requiredValues
+    newValues
   );
 
   function handleChange(event) {
@@ -30,7 +29,6 @@ export default function FormWithValidation({
         const value = String(newValues[key]);
 
         const type = key === 'email' ? 'email' : 'text';
-        const required = requiredValues.includes(key);
 
         return (
           <div key={key} className="field">
@@ -44,7 +42,6 @@ export default function FormWithValidation({
                 name={key}
                 onChange={handleChange}
                 value={value || ''}
-                required={required}
                 disabled={key === 'id'}
               />
               {errors[key] && <p className="help is-danger">{errors[key]}</p>}
