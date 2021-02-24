@@ -1,7 +1,7 @@
-export default function Modal({ children, title, close }) {
+export default function Modal({ children, title, handleClose }) {
   return (
     <div className="modal is-clipped is-active">
-      <div className="modal-background" onClick={close}></div>
+      <div className="modal-background" onClick={handleClose}></div>
       <div className="modal-content">
         <div className="modal-card">
           <header className="modal-card-head">
@@ -13,7 +13,7 @@ export default function Modal({ children, title, close }) {
       <button
         className="modal-close is-large"
         aria-label="close"
-        onClick={close}
+        onClick={handleClose}
       ></button>
     </div>
   );

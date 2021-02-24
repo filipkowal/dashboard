@@ -23,9 +23,9 @@ export default function AddUserForm({ setUsers, toggleUserForm }) {
   }
 
   return (
-    <Modal title={'Add user'} close={() => toggleUserForm(false)}>
+    <Modal title={'Add user'} handleClose={() => toggleUserForm(false)}>
       <FormValidated
-        values={defaultUser}
+        defaultValues={defaultUser}
         handleSubmit={addUser}
         handleCancel={() => toggleUserForm(false)}
       />

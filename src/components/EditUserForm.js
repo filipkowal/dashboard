@@ -7,7 +7,6 @@ export default function EditUserForm({ user, setUsers, toggleUserForm }) {
   const strippedUser = { id, name, username, email, phone, website };
 
   function editUser(user) {
-    console.log('editUser', user);
     const unStrippedUser = { ...user, ...rest };
     apiEditUser(unStrippedUser);
     setUsers(prev => [
@@ -18,9 +17,9 @@ export default function EditUserForm({ user, setUsers, toggleUserForm }) {
   }
 
   return (
-    <Modal title={'Add user'} close={() => toggleUserForm(false)}>
+    <Modal title={'Add user'} handleClose={() => toggleUserForm(false)}>
       <FormValidated
-        values={strippedUser}
+        defaultValues={strippedUser}
         handleSubmit={editUser}
         handleCancel={() => toggleUserForm(false)}
       />

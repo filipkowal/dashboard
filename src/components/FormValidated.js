@@ -3,21 +3,20 @@ import { useState } from 'react';
 import useFormValidation from '../utils/useFormValidation';
 
 export default function FormWithValidation({
-  values,
+  defaultValues,
   handleSubmit,
   handleCancel,
-  requiredValues,
 }) {
-  const [newValues, setNewValues] = useState(values || {});
+  const [values, setValues] = useState(defaultValues || {});
 
   const { errors, handleSubmit: handleSubmitValidated } = useFormValidation(
     handleSubmit,
-    newValues
+    values
   );
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setNewValues(prev => ({
+    setValues(prev => ({
       ...prev,
       [name]: value,
     }));
@@ -25,8 +24,8 @@ export default function FormWithValidation({
 
   return (
     <form onSubmit={handleSubmitValidated} noValidate>
-      {Object.keys(newValues).map(key => {
-        const value = String(newValues[key]);
+      {Object.keys(values).map(key => {
+        const value = String(values[key]);
 
         const type = key === 'email' ? 'email' : 'text';
 
